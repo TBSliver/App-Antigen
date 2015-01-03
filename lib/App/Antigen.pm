@@ -172,7 +172,7 @@ sub write_output_file {
 
 =head1 AUTHOR
 
-Tom Bloor E<lt>t.bloor at shadowcat.co.ukE<gt>
+Tom Bloor E<lt>tom.bloor@googlemail.comE<gt>
 
 =head1 COPYRIGHT
 

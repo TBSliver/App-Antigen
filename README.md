@@ -12,7 +12,7 @@ App::Antigen is the main module for the antigen-perl application.
 
 # AUTHOR
 
-Tom Bloor <t.bloor at shadowcat.co.uk>
+Tom Bloor <tom.bloor@googlemail.com>
 
 # COPYRIGHT
 
