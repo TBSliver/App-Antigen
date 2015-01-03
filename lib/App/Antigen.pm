@@ -42,47 +42,27 @@ option 'repo' => (
   is => 'lazy',
   format => 's',
   short => 'r',
+  builder => sub { File::Spec->catfile( $_[0]->output, 'repos' ) },
   doc => 'Directory for Antigen-Perl repos',
 );
-
-sub _build_repo {
-  my $self = shift;
-
-  return File::Spec->catfile( $self->output, 'repos' );
-}
 
 option 'output_file' => (
   is => 'lazy',
   format => 's',
   short => 'f',
+  builder => sub { File::Spec->catfile( $_[0]->output, 'antigen-perl.zsh' ) },
   doc => 'Final output file for sourcing',
 );
 
-sub _build_output_file {
-  my $self = shift;
-
-  return File::Spec->catfile( $self->output, 'antigen-perl.zsh' );
-}
-
 has 'yaml' => (
   is => 'lazy',
+  builder => sub { YAML::Tiny->read( $_[0]->config )->[0] },
 );
-
-sub _build_yaml {
-  my $self = shift;
-
-  return YAML::Tiny->read( $self->config )->[0];
-}
 
 has 'plugins' => (
   is => 'lazy',
+  builder => sub { $_[0]->yaml->{ plugins } },
 );
-
-sub _build_plugins {
-  my $self = shift;
-
-  return $self->yaml->{plugins};
-}
 
 sub run {
   my $self = shift;
@@ -108,15 +88,13 @@ sub run {
 }
 
 sub gen_github_url {
-  my $self = shift;
-  my $repo = shift;
+  my ( $self, $repo ) = @_;
 
   return sprintf( "https://github.com/%s.git", $repo );
 }
 
 sub gen_plugin_target {
-  my $self = shift;
-  my $repo = shift;
+  my ( $self, $repo ) = @_;
 
   $repo =~ s/:/-COLON-/g;
   $repo =~ s/\//-SLASH-/g;
@@ -125,8 +103,7 @@ sub gen_plugin_target {
 }
 
 sub github_cmd {
-  my $self = shift;
-  my $repo = shift;
+  my ( $self, $repo ) = @_;
 
   my $url = $self->gen_github_url( $repo );
   my $output_file = $self->gen_plugin_target( $url );
@@ -141,8 +118,7 @@ sub github_cmd {
 }
 
 sub find_plugin {
-  my $self = shift;
-  my $dir = shift;
+  my ( $self, $dir ) = @_;
 
   my @plugins;
 
@@ -155,9 +131,7 @@ sub find_plugin {
 }
 
 sub write_output_file {
-  my $self = shift;
-  my $plugins = shift;
-  my $directories = shift;
+  my ( $self, $plugins, $directories ) = @_;
 
   my $file = path( $self->output_file );
 
