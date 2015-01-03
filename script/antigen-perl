@@ -11,4 +11,4 @@ use App::Antigen;
 
 my $app = App::Antigen->new_with_options;
 
-$app->init;
+$app->run;

@@ -83,7 +83,7 @@ sub _build_plugins {
   return $self->yaml->{plugins};
 }
 
-sub init {
+sub run {
   my $self = shift;
 
   my @plugin_dirs;
