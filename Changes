@@ -1,4 +1,4 @@
 Revision history for App-Antigen
 
 {{$NEXT}}
-        - Initial release
+        - Initial release, supporting only github hosted plugins

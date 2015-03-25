@@ -3,12 +3,15 @@
 use strict;
 use warnings;
 
-use FindBin qw/ $Bin /;
-
-use lib "$Bin/../lib";
-
+use File::Spec;
 use App::Antigen;
+use YAML::Tiny;
 
-my $app = App::Antigen->new_with_options;
+
+my $config_filename = $ARGV[0] || File::Spec->catfile( $ENV{HOME}, '.zsh', 'config.yml' );
+
+my $config = YAML::Tiny->read( $config_filename )->[0];
+
+my $app = App::Antigen->new_with_options( %$config );
 
 $app->run;
