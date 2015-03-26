@@ -118,6 +118,8 @@ filename for the list of plugins to be 'sourced' inside. Set it as follows
 This is also the file which the application will tell you to source in your
 ~/.zshrc file.
 
+=back
+
 =head1 AUTHOR
 
 Tom Bloor E<lt>tom.bloor@googlemail.comE<gt>
